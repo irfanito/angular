@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.1.
 
+# Build status
+
+![workflow status](https://github.com/irfanito/attestation-covid/workflows/Continuous%20deployment%20to%20Firebase%20Hosting%20on%20push/badge.svg)
+
+## Production URL
+
+https://angular-formation-irf.web.app
+
 ## Development server
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`.
