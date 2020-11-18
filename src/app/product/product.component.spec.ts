@@ -34,4 +34,9 @@ describe('ProductComponent', () => {
     const h3: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement
     expect(h3.textContent).toBe('title - 3$');
   });
+
+  it('should bind photo property to img.src', () => {
+    const img: HTMLImageElement = fixture.debugElement.query(By.css('img')).nativeElement
+    expect(img.src.endsWith('photo')).toBeTruthy();
+  });
 });
