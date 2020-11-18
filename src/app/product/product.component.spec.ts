@@ -39,4 +39,11 @@ describe('ProductComponent', () => {
     const img: HTMLImageElement = fixture.debugElement.query(By.css('img')).nativeElement
     expect(img.src.endsWith('photo')).toBeTruthy();
   });
+
+  it('should emit addToBasket event when click on button', () => {
+    spyOn (component.addToBasket,'emit');
+    const button: HTMLImageElement = fixture.debugElement.query(By.css('button')).nativeElement
+    button.click();
+    expect(component.addToBasket.emit).toHaveBeenCalledOnceWith(component.data);
+  });
 });
