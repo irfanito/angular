@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'This is my first component';
+  title: string = 'This is my first component';
+  total: number;
+  
+  constructor(){
+    this.total = 0;
+  }
 }
