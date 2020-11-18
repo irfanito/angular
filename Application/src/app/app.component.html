@@ -16,12 +16,48 @@
       </div>
   </div>
   <div class="row text-center">
-    <div class="col-md-3 col-sm-6 product-item">
+    <div class="col-md-3 col-sm-6 product-item" *ngIf="products[0]; let product">
         <div class="thumbnail">
-            <img src="{{products[0].photo}}" alt="">
+            <img src="{{product.photo}}" alt="">
             <div class="caption">
-                <h3>{{products[0].title}} - {{products[0].price}}$</h3>
-                <p>{{products[0].description}}</p>
+                <h3>{{product.title}} - {{product.price}}$</h3>
+                <p>{{product.description}}</p>
+                <p>
+                    <button class="btn btn-primary">Add to basket</button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 product-item" *ngIf="products[1]; let product">
+        <div class="thumbnail">
+            <img src="{{product.photo}}" alt="">
+            <div class="caption">
+                <h3>{{product.title}} - {{product.price}}$</h3>
+                <p>{{product.description}}</p>
+                <p>
+                    <button class="btn btn-primary">Add to basket</button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 product-item" *ngIf="products[2]; let product">
+        <div class="thumbnail">
+            <img src="{{product.photo}}" alt="">
+            <div class="caption">
+                <h3>{{product.title}} - {{product.price}}$</h3>
+                <p>{{product.description}}</p>
+                <p>
+                    <button class="btn btn-primary">Add to basket</button>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-6 product-item" *ngIf="products[3]; let product">
+        <div class="thumbnail">
+            <img src="{{product.photo}}" alt="">
+            <div class="caption">
+                <h3>{{product.title}} - {{product.price}}$</h3>
+                <p>{{product.description}}</p>
                 <p>
                     <button class="btn btn-primary">Add to basket</button>
                 </p>
@@ -29,7 +65,6 @@
         </div>
     </div>
   </div>
-
   <hr>
 
   <footer>
