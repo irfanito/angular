@@ -18,9 +18,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'This is my first component'`, () => {
+  it(`should have total 0`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('This is my first component');
+    expect(app.total).toEqual(0);
   });
 });
