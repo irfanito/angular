@@ -30,7 +30,7 @@ describe('ProductComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should bind title property to h3', () => {
+  it('should bind title and price property to h3', () => {
     const h3: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement
     expect(h3.textContent).toBe('title - 3$');
   });
