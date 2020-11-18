@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Build status
 
-![workflow status](https://github.com/irfanito/attestation-covid/workflows/Continuous%20deployment%20to%20Firebase%20Hosting%20on%20push/badge.svg)
+![workflow status](https://github.com/irfanito/angular/workflows/Continuous%20deployment%20to%20Firebase%20Hosting%20on%20push/badge.svg)
 
 ## Production URL
 
