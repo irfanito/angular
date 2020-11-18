@@ -2,7 +2,7 @@
 
 <div class="container">
 
-  <header class="jumbotron hero-spacer">
+   <header class="jumbotron hero-spacer">
     <h1>Welcome to Zenika Ecommerces</h1>
     <p>Your basket amounts to {{total}}€</p>
     <p><a class="btn btn-primary btn-large">See my basket</a></p>
@@ -16,10 +16,22 @@
       </div>
   </div>
   <div class="row text-center">
-    <app-product [data]="products[0]"></app-product>
-    <app-product [data]="products[1]"></app-product>
-    <app-product [data]="products[2]"></app-product>
-    <app-product [data]="products[3]"></app-product>
+    <app-product
+        [data]="products[0]"
+        (addToBasket)="onAddToBasket($event)"
+    ></app-product>
+    <app-product
+        [data]="products[1]"
+        (addToBasket)="onAddToBasket($event)"
+    ></app-product>
+    <app-product
+        [data]="products[2]"
+        (addToBasket)="onAddToBasket($event)"
+    ></app-product>
+    <app-product
+        [data]="products[3]"
+        (addToBasket)="onAddToBasket($event)"
+    ></app-product>
   </div>
   <hr>
 

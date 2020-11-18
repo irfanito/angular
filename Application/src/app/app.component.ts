@@ -16,6 +16,10 @@ export class AppComponent {
     this.products = AppComponent.defaultProducts;
   }
 
+  public onAddToBasket(product: Product): void {
+    this.total = this.total + product.price
+  }
+
   static defaultProducts = [{
     title: 'Men Sweatshirt',
     description: 'C0D1NG_TH3_W0RLD BIO HOODIE - MEN',

@@ -5,7 +5,10 @@
             <h3>{{data.title}} - {{data.price}}$</h3>
             <p>{{data.description}}</p>
             <p>
-                <button class="btn btn-primary">Add to basket</button>
+                <button
+                    class="btn btn-primary"
+                    (click)="addToBasket.emit(data)"
+                >Add to basket</button>
             </p>
         </div>
     </div>
