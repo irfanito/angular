@@ -33,18 +33,19 @@ describe('AppComponent', () => {
     expect(app.total).toEqual(0);
   });
 
-  it(`should return 39 when total 0 and updatePrice with a 39$ product price 39`, () => {
+  it(`should have 5$ total when 2$ total and updatePrice with a 3$ product`, () => {
     // given
+    app.total = 2
     const product: Product = {
-      title: 'Men Sweatshirt',
-      description: 'C0D1NG_TH3_W0RLD BIO HOODIE - MEN',
-      photo: 'https://s3.eu-central-1.amazonaws.com/balibart-s3/Products/5acf344514006a7fe670e2eb/Mockups/front.png',
-      price: 39
+      title: 'title',
+      description: 'description',
+      photo: 'photo',
+      price: 3
     };
     // when
     app.updatePrice(product);
     // then
-    expect(app.total).toEqual(39);
+    expect(app.total).toEqual(5);
   });
 
   it(`should pass products to ProductComponent childs`, () => {
