@@ -17,42 +17,9 @@
   </div>
   <div class="row text-center">
     <app-product [data]="products[0]"></app-product>
-    <div class="col-md-3 col-sm-6 product-item" *ngIf="products[1]; let product">
-        <div class="thumbnail">
-            <img src="{{product.photo}}" alt="">
-            <div class="caption">
-                <h3>{{product.title}} - {{product.price}}$</h3>
-                <p>{{product.description}}</p>
-                <p>
-                    <button class="btn btn-primary">Add to basket</button>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 product-item" *ngIf="products[2]; let product">
-        <div class="thumbnail">
-            <img src="{{product.photo}}" alt="">
-            <div class="caption">
-                <h3>{{product.title}} - {{product.price}}$</h3>
-                <p>{{product.description}}</p>
-                <p>
-                    <button class="btn btn-primary">Add to basket</button>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6 product-item" *ngIf="products[3]; let product">
-        <div class="thumbnail">
-            <img src="{{product.photo}}" alt="">
-            <div class="caption">
-                <h3>{{product.title}} - {{product.price}}$</h3>
-                <p>{{product.description}}</p>
-                <p>
-                    <button class="btn btn-primary">Add to basket</button>
-                </p>
-            </div>
-        </div>
-    </div>
+    <app-product [data]="products[1]"></app-product>
+    <app-product [data]="products[2]"></app-product>
+    <app-product [data]="products[3]"></app-product>
   </div>
   <hr>
 
