@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { ProductComponent } from './product.component';
 
@@ -17,15 +18,20 @@ describe('ProductComponent', () => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
     component.data = {
-      title: 'Men Sweatshirt',
-      description: 'C0D1NG_TH3_W0RLD BIO HOODIE - MEN',
-      photo: 'https://s3.eu-central-1.amazonaws.com/balibart-s3/Products/5acf344514006a7fe670e2eb/Mockups/front.png',
-      price: 39
+      title: 'title',
+      description: 'description',
+      photo: 'photo',
+      price: 3
     };
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should bind title property to h3', () => {
+    const h3: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement
+    expect(h3.textContent).toBe('title - 3$');
   });
 });
