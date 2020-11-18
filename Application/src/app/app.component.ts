@@ -16,7 +16,7 @@ export class AppComponent {
     this.products = AppComponent.defaultProducts;
   }
 
-  public onAddToBasket(product: Product): void {
+  public updatePrice(product: Product): void {
     this.total = this.total + product.price
   }
 
