@@ -49,6 +49,16 @@ describe('ProductService', () => {
     product.stock = 1;
     expect(service.isAvailable(product)).toBeTruthy();
   });
+
+  it('should decreaseStock return 4 when stock is 5', () => {
+    // given
+    const product: Product = initProduct();
+    product.stock = 5;
+    // when
+    service.decreaseStock(product);
+    // then
+    expect(product.stock).toBe(4);
+  });
 });
 
 function initProduct(): Product {

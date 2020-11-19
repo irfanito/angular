@@ -7,6 +7,14 @@ import { defaultProducts } from '../products';
 })
 export class ProductService {
 
+  decreaseStock(product: Product): void {
+    product.stock = product.stock - 1;
+  }
+  
+  isAvailable(product: Product): boolean {
+    return product.stock > 0;
+  }
+
   isTheLast(product: Product): boolean {
     return product.stock === 1;
   }
