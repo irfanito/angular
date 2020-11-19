@@ -64,10 +64,13 @@ describe('AppComponent', () => {
     expect(product.stock).toEqual(4);
   });
 
-  it(`should pass products to ProductComponent childs`, () => {
+  it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {
+    app.products[0].stock = 0;
+    fixture.detectChanges();
     const products: Product[] = fixture.debugElement
     .queryAll(By.directive(ProductComponent))
     .map(debugElement => debugElement.componentInstance.data);
-    expect(app.products).toEqual(products);
+    let [firstProduct, ...otherProducts] = app.products;
+    expect(otherProducts).toEqual(products);
   });
 });
