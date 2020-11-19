@@ -1,3 +1,4 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -46,5 +47,32 @@ describe('ProductComponent', () => {
     const button: HTMLImageElement = fixture.debugElement.query(By.css('button')).nativeElement
     button.click();
     expect(component.addToBasket.emit).toHaveBeenCalledOnceWith(component.data);
+  });
+
+  it('should isLast return false when stock is 0', () => {
+    component.data.stock = 0
+    expect(component.isLast()).toBeFalsy();
+  });
+
+  it('should isLast return false when stock is 1', () => {
+    component.data.stock = 1
+    expect(component.isLast()).toBeTruthy();
+  });
+
+  it('should isLast return false when stock is 2', () => {
+    component.data.stock = 2
+    expect(component.isLast()).toBeFalsy();
+  });
+
+  it('should use last css class when isLast return true', () => {
+    spyOn (component,'isLast').and.returnValue(true);
+    const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
+    expect(thumbnailLastDebugElements).toBeTruthy();
+  });
+
+  it('should use last css class when isLast return false', () => {
+    spyOn (component,'isLast').and.returnValue(false);
+    const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
+    expect(thumbnailLastDebugElements.length).toBeFalsy();
   });
 });

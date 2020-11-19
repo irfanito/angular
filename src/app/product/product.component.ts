@@ -11,4 +11,8 @@ export class ProductComponent {
   @Output() addToBasket = new EventEmitter<Product>();
   
   constructor() { }
+
+  public isLast(): boolean {
+    return this.data.stock === 1;
+  }
 }
