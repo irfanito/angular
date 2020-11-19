@@ -34,7 +34,7 @@ describe('ProductComponent', () => {
 
   it('should bind title and price property to h3', () => {
     const h3: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement
-    expect(h3.textContent).toBe('title - 3$');
+    expect(h3.textContent).toBe('title - €3.00');
   });
 
   it('should bind photo property to img.src', () => {

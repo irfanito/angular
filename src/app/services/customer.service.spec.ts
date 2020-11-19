@@ -31,6 +31,10 @@ describe('CustomerService', () => {
     service.basket[1].price = 3;
     expect(service.getTotal()).toEqual(5);
   });
+
+  it('should getTotal return 0$ when empty basket', () => {
+    expect(service.getTotal()).toEqual(0);
+  });
 });
 
 function initProduct(): Product {

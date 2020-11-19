@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { Product } from './model/model/product';
 import { ProductComponent } from './product/product.component';
+import { SortByPipe } from './sort-by.pipe';
 
 describe('AppComponent', () => {
   let app: AppComponent;
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        ProductComponent
+        ProductComponent,
+        SortByPipe
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
@@ -47,21 +49,6 @@ describe('AppComponent', () => {
     app.updatePrice(product);
     // then
     expect(app.total).toEqual(5);
-  });
-
-  it(`should not updatePrice set product stock`, () => {
-    // given
-    const product: Product = {
-      title: 'title',
-      description: 'description',
-      photo: 'photo',
-      price: 3,
-      stock: 5
-    };
-    // when
-    app.updatePrice(product);
-    // then
-    expect(product.stock).toEqual(5);
   });
 
   it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {
