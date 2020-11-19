@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../model/model/product';
 import { defaultProducts } from '../products';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProductService {
 
   decreaseStock(product: Product): void {
