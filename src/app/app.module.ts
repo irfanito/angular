@@ -8,6 +8,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ProductComponent } from './product/product.component';
 import { ProductService } from './services/product.service';
 import { CustomerService } from './services/customer.service';
+import { SortByTitlePipe } from './sort-by-title.pipe';
 
 registerLocaleData(localeFr);
 
@@ -15,7 +16,8 @@ registerLocaleData(localeFr);
   declarations: [
     AppComponent,
     MenuComponent,
-    ProductComponent
+    ProductComponent,
+    SortByTitlePipe
   ],
   imports: [
     BrowserModule
