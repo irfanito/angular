@@ -31,11 +31,11 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have 0$ total on initialization`, () => {
+  it(`should have 0€ total on initialization`, () => {
     expect(app.total).toEqual(0);
   });
 
-  it(`should have 5$ total when 2$ total and updatePrice with a 3$ product`, () => {
+  it(`should have 5€ total when 2€ total and updatePrice with a 3€ product`, () => {
     // given
     app.total = 2
     const product: Product = {
