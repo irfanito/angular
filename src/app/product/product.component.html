@@ -1,5 +1,5 @@
-onAddToBasket()<div class="col-md-3 col-sm-6 product-item">
-    <div class="thumbnail" ngClass="{'last': isLast()}">
+<div class="col-md-3 col-sm-6 product-item">
+    <div class="thumbnail" [ngClass]="{'last': isLast()}">
         <img src="{{data.photo}}" alt="">
         <div class="caption">
             <h3>{{data.title}} - {{data.price}}$</h3>
