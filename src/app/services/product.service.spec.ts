@@ -20,22 +20,34 @@ describe('ProductService', () => {
     expect(service.getProducts()).toBe(defaultProducts);
   });
 
-  it('should isLast return false when stock is 0', () => {
+  it('should isTheLast return false when stock is 0', () => {
     const product: Product = initProduct();
     product.stock = 0;
     expect(service.isTheLast(product)).toBeFalsy();
   });
 
-  it('should isLast return false when stock is 1', () => {
+  it('should isTheLast return false when stock is 1', () => {
     const product: Product = initProduct();
     product.stock = 1;
     expect(service.isTheLast(product)).toBeTruthy();
   });
 
-  it('should isLast return false when stock is 2', () => {
+  it('should isTheLast return false when stock is 2', () => {
     const product: Product = initProduct();
     product.stock = 2;
     expect(service.isTheLast(product)).toBeFalsy();
+  });
+
+  it('should isAvailable return false when stock is 0', () => {
+    const product: Product = initProduct();
+    product.stock = 0;
+    expect(service.isAvailable(product)).toBeFalsy();
+  });
+
+  it('should isAvailable return false when stock is 1', () => {
+    const product: Product = initProduct();
+    product.stock = 1;
+    expect(service.isAvailable(product)).toBeTruthy();
   });
 });
 
