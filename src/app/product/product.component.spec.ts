@@ -1,16 +1,26 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { CustomerService } from '../services/customer.service';
+import { ProductService } from '../services/product.service';
 
 import { ProductComponent } from './product.component';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
+  let customerServiceStub;
+  let productServiceStub;
 
   beforeEach(async () => {
+    customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['addProduct']);
+    productServiceStub = jasmine.createSpyObj('productServiceStub', ['isTheLast', 'decreaseStock']);
     await TestBed.configureTestingModule({
-      declarations: [ ProductComponent ]
+      declarations: [ ProductComponent ],
+      providers: [
+        {provide: CustomerService, useValue:customerServiceStub},
+        {provide: ProductService, useValue:productServiceStub}
+      ],
     })
     .compileComponents();
   });
@@ -33,65 +43,55 @@ describe('ProductComponent', () => {
   });
 
   it('should bind title and price property to h3', () => {
-    const h3: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement
+    const h3: HTMLElement = fixture.debugElement.query(By.css('h3')).nativeElement;
     expect(h3.textContent).toBe('title - €3.00');
   });
 
   it('should bind photo property to img.src', () => {
-    const img: HTMLImageElement = fixture.debugElement.query(By.css('img')).nativeElement
+    const img: HTMLImageElement = fixture.debugElement.query(By.css('img')).nativeElement;
     expect(img.src.endsWith('photo')).toBeTruthy();
   });
 
   it('should emit addToBasket event when click on button', () => {
+    // given
     spyOn (component.addToBasket,'emit');
-    const button: HTMLImageElement = fixture.debugElement.query(By.css('button')).nativeElement
+    const button: HTMLImageElement = fixture.debugElement.query(By.css('button')).nativeElement;
+    // when
     button.click();
+    // then
     expect(component.addToBasket.emit).toHaveBeenCalledOnceWith(component.data);
   });
 
-  it(`should onAddToBasket set product stock to 4 when stock is 5`, () => {
-    // given
-    component.data.stock = 5
+  it(`should onAddToBasket call customerService.addProduct with data`, () => {
     // when
     component.onAddToBasket();
     // then
-    expect(component.data.stock).toEqual(4);
+    expect(customerServiceStub.addProduct).toHaveBeenCalledOnceWith(component.data);
   });
 
-  it(`should onAddToBasket set product stock to 4 when stock is 5`, () => {
-    // given
-    component.data.stock = 5
+  it(`should onAddToBasket call productService.decreaseStock with data`, () => {
     // when
     component.onAddToBasket();
     // then
-    expect(component.data.stock).toEqual(4);
+    expect(productServiceStub.decreaseStock).toHaveBeenCalledOnceWith(component.data);
   });
 
-  it('should isLast return false when stock is 0', () => {
-    component.data.stock = 0
-    expect(component.isLast()).toBeFalsy();
-  });
-
-  it('should isLast return false when stock is 1', () => {
-    component.data.stock = 1
-    expect(component.isLast()).toBeTruthy();
-  });
-
-  it('should isLast return false when stock is 2', () => {
-    component.data.stock = 2
-    expect(component.isLast()).toBeFalsy();
-  });
-
-  it('should use last css class when isLast return true', () => {
-    spyOn (component,'isLast').and.returnValue(true);
+  it('should use last css class when productService.isTheLast return true', () => {
+    // given
+    productServiceStub.isTheLast.and.returnValue(true);
+    // when
     fixture.detectChanges();
+    // then
     const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
     expect(thumbnailLastDebugElements.length).toBeTruthy();
   });
 
-  it('should use last css class when isLast return false', () => {
-    spyOn (component,'isLast').and.returnValue(false);
+  it('should use last css class when productService.isTheLast return false', () => {
+    // given
+    productServiceStub.isTheLast.and.returnValue(false);
+    // when
     fixture.detectChanges();
+    //then
     const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
     expect(thumbnailLastDebugElements.length).toBeFalsy();
   });
