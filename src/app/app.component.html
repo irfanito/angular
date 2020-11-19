@@ -18,7 +18,7 @@
   <div class="row text-center">
     <ng-container *ngFor="let product of products;">
       <app-product
-          *ngIf="product.stock"
+          *ngIf="showProduct(product)"
           [data]="product"
           (addToBasket)="updatePrice($event)"
       ></app-product>
