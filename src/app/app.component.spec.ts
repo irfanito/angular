@@ -49,7 +49,7 @@ describe('AppComponent', () => {
     expect(app.total).toEqual(5);
   });
 
-  it(`should updatePrice set product stock to 4 when stock is 5`, () => {
+  it(`should not updatePrice set product stock`, () => {
     // given
     const product: Product = {
       title: 'title',
@@ -61,7 +61,7 @@ describe('AppComponent', () => {
     // when
     app.updatePrice(product);
     // then
-    expect(product.stock).toEqual(4);
+    expect(product.stock).toEqual(5);
   });
 
   it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {

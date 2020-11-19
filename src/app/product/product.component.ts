@@ -15,4 +15,9 @@ export class ProductComponent {
   public isLast(): boolean {
     return this.data.stock === 1;
   }
+
+  public onAddToBasket() {
+    this.data.stock = this.data.stock - 1;
+    this.addToBasket.emit(this.data);
+  }
 }

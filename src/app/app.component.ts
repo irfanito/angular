@@ -18,7 +18,6 @@ export class AppComponent {
 
   public updatePrice(product: Product): void {
     this.total = this.total + product.price
-    product.stock = product.stock - 1;
   }
 
   static defaultProducts = [{

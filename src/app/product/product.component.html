@@ -1,4 +1,4 @@
-<div class="col-md-3 col-sm-6 product-item">
+onAddToBasket()<div class="col-md-3 col-sm-6 product-item">
     <div class="thumbnail" ngClass="{'last': isLast()}">
         <img src="{{data.photo}}" alt="">
         <div class="caption">
@@ -7,7 +7,7 @@
             <p>
                 <button
                     class="btn btn-primary"
-                    (click)="addToBasket.emit(data)"
+                    (click)="onAddToBasket()"
                 >Add to basket</button>
             </p>
         </div>

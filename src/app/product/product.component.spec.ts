@@ -49,6 +49,24 @@ describe('ProductComponent', () => {
     expect(component.addToBasket.emit).toHaveBeenCalledOnceWith(component.data);
   });
 
+  it(`should onAddToBasket set product stock to 4 when stock is 5`, () => {
+    // given
+    component.data.stock = 5
+    // when
+    component.onAddToBasket();
+    // then
+    expect(component.data.stock).toEqual(4);
+  });
+
+  it(`should onAddToBasket set product stock to 4 when stock is 5`, () => {
+    // given
+    component.data.stock = 5
+    // when
+    component.onAddToBasket();
+    // then
+    expect(component.data.stock).toEqual(4);
+  });
+
   it('should isLast return false when stock is 0', () => {
     component.data.stock = 0
     expect(component.isLast()).toBeFalsy();
