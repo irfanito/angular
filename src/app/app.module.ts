@@ -22,7 +22,7 @@ registerLocaleData(localeFr);
   imports: [
     BrowserModule
   ],
-  providers:[ProductService,CustomerService],
+  providers:[ProductService,CustomerService,{provide: LOCALE_ID, useValue: navigator.language}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
