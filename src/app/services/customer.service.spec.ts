@@ -13,4 +13,8 @@ describe('CustomerService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should have an empty basket on initialization', () => {
+    expect(service.basket).toEqual([]);
+  });
 });
