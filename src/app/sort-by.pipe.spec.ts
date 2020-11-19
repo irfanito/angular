@@ -1,11 +1,11 @@
 import { Product } from './model/model/product';
-import { SortByTitlePipe } from './sort-by-title.pipe';
+import { SortByPipe } from './sort-by.pipe';
 
-describe('SortByTitlePipe', () => {
-  let pipe: SortByTitlePipe;
+describe('SortByPipe', () => {
+  let pipe: SortByPipe;
   
   beforeEach(()=>{
-    pipe =new SortByTitlePipe();
+    pipe =new SortByPipe();
   });
 
   it('create an instance', () => {
@@ -17,7 +17,7 @@ describe('SortByTitlePipe', () => {
     const param = [initProduct('c'), initProduct('a'), initProduct('b')];
     const expected = [initProduct('a'), initProduct('b'), initProduct('c')];
     // when
-    const actual = pipe.transform(param);
+    const actual = pipe.transform(param, 'title');
     // then
     expect(actual).toEqual(expected);
   });
