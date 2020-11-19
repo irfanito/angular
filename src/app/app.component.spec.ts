@@ -49,6 +49,21 @@ describe('AppComponent', () => {
     expect(app.total).toEqual(5);
   });
 
+  it(`should updatePrice set product stock to 4 when stock is 5`, () => {
+    // given
+    const product: Product = {
+      title: 'title',
+      description: 'description',
+      photo: 'photo',
+      price: 3,
+      stock: 5
+    };
+    // when
+    app.updatePrice(product);
+    // then
+    expect(product.stock).toEqual(4);
+  });
+
   it(`should pass products to ProductComponent childs`, () => {
     const products: Product[] = fixture.debugElement
     .queryAll(By.directive(ProductComponent))
