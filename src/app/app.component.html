@@ -15,15 +15,17 @@
           <h2>Last products</h2>
           Sort by :
           <span></span>
-          <button class="btn btn-secondary">title</button>
-          <span></span>
-          <button class="btn btn-secondary">price</button>
-          <span></span>
-          <button class="btn btn-secondary">stock</button>
+          <button
+            *ngFor="let sortProperty of sortPropertyNames"
+            id="{{sortProperty}}Button"
+            class="btn btn-secondary"
+            (click)="onSortByButtonClick(sortProperty)"
+          >{{sortProperty}}
+        </button>
       </div>
   </div>
   <div class="row text-center">
-    <ng-container *ngFor="let product of products | sortBy:'title'">
+    <ng-container *ngFor="let product of products | sortBy:sortPropertyName">
       <app-product
           *ngIf="showProduct(product)"
           [data]="product"

@@ -4,6 +4,7 @@ import { defaultProducts } from './products';
 import { CustomerService } from './services/customer.service';
 import { ProductService } from './services/product.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +13,8 @@ import { ProductService } from './services/product.service';
 export class AppComponent {
   title: string = 'This is my first component';
   total: number;
+  sortPropertyName: string = 'title';
+  sortPropertyNames: string[] = ['title','price','stock'];
   
   constructor(private productService: ProductService, private customerService: CustomerService){
     this.total = 0;
@@ -27,5 +30,9 @@ export class AppComponent {
 
   public updatePrice(product: Product): void {
     this.total = this.customerService.getTotal();
+  }  
+
+  public onSortByButtonClick(propertyName: string): void {
+    this.sortPropertyName = propertyName;
   }
 }

@@ -76,6 +76,21 @@ describe('AppComponent', () => {
       .map(debugElement => debugElement.componentInstance.data);
     expect(actual).toEqual(expected);
   });
+
+  it(`should sort by price when click on price button`, () => {
+    // mock
+    const [product0, product1, product2, product3]: Product[] = defaultProducts;
+    // expected
+    let expected: Product[] = [product3, product2, product0, product1];
+    // when
+    const priceButton: HTMLImageElement = fixture.debugElement.query(By.css('#priceButton')).nativeElement;
+    priceButton.click();
+    fixture.detectChanges();
+      // then
+    const actual: Product[] = fixture.debugElement.queryAll(By.directive(ProductComponent))
+      .map(debugElement => debugElement.componentInstance.data);
+    expect(actual).toEqual(expected);
+  });
 });
 
 function defaultMock(productServiceStub: any) {
