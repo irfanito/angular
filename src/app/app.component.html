@@ -16,7 +16,7 @@
       </div>
   </div>
   <div class="row text-center">
-    <ng-container *ngFor="let product of products;">
+    <ng-container *ngFor="let product of products | sortByTitle">
       <app-product
           *ngIf="showProduct(product)"
           [data]="product"
