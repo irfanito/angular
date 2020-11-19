@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { Product } from '../model/model/product';
 
 import { CustomerService } from './customer.service';
 
@@ -17,4 +18,20 @@ describe('CustomerService', () => {
   it('should have an empty basket on initialization', () => {
     expect(service.basket).toEqual([]);
   });
+
+  it('should addProduct add product to basket', () => {
+    const product: Product = initProduct();
+    service.addProduct(product);
+    expect(service.basket).toEqual([product]);
+  });
 });
+
+function initProduct(): Product {
+  return {
+    title: 'title',
+    description: 'description',
+    photo: 'photo',
+    price: 3,
+    stock: 2
+  };
+}

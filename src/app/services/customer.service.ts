@@ -5,7 +5,12 @@ import { Product } from '../model/model/product';
   providedIn: 'root'
 })
 export class CustomerService {
+
   basket: Product[] = [];
+
+  addProduct(product: Product): void {
+    this.basket.push(product);
+  }
 
   constructor() { }
 }
