@@ -6,6 +6,11 @@ import { defaultProducts } from '../products';
   providedIn: 'root'
 })
 export class ProductService {
+
+  isTheLast(product: Product): boolean {
+    return product.stock === 1;
+  }
+  
   getProducts(): Product[] {
     return defaultProducts;
   }
