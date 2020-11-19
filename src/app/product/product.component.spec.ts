@@ -84,12 +84,14 @@ describe('ProductComponent', () => {
 
   it('should use last css class when isLast return true', () => {
     spyOn (component,'isLast').and.returnValue(true);
+    fixture.detectChanges();
     const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
-    expect(thumbnailLastDebugElements).toBeTruthy();
+    expect(thumbnailLastDebugElements.length).toBeTruthy();
   });
 
   it('should use last css class when isLast return false', () => {
     spyOn (component,'isLast').and.returnValue(false);
+    fixture.detectChanges();
     const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
     expect(thumbnailLastDebugElements.length).toBeFalsy();
   });
