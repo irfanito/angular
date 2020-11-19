@@ -21,7 +21,8 @@ describe('ProductComponent', () => {
       title: 'title',
       description: 'description',
       photo: 'photo',
-      price: 3
+      price: 3,
+      stock: 0
     };
     fixture.detectChanges();
   });
