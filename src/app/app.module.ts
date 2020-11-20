@@ -4,6 +4,7 @@ import localeFr from '@angular/common/locales/fr';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
+import {BasketComponent} from './basket/basket.component';
 import {HomeComponent} from './home/home.component';
 import {MenuComponent} from './menu/menu.component';
 import {ProductComponent} from './product/product.component';
@@ -19,7 +20,8 @@ registerLocaleData(localeFr);
     MenuComponent,
     ProductComponent,
     SortByPipe,
-    HomeComponent
+    HomeComponent,
+    BasketComponent
   ],
   imports: [
     BrowserModule,
