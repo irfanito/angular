@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Product } from '../model/model/product';
-import { CustomerService } from '../services/customer.service';
-import { ProductService } from '../services/product.service';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Product} from '../model/model/product';
+import {CustomerService} from '../services/customer.service';
+import {ProductService} from '../services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +11,7 @@ import { ProductService } from '../services/product.service';
 export class ProductComponent {
   @Input() data: Product;
   @Output() addToBasket = new EventEmitter<Product>();
-  
+
   constructor(private productService: ProductService, private customerService: CustomerService){}
 
   public isLast(): boolean {
@@ -20,7 +20,6 @@ export class ProductComponent {
 
   public onAddToBasket() {
     this.productService.decreaseStock(this.data);
-    this.customerService.addProduct(this.data);
     this.addToBasket.emit(this.data);
   }
 }

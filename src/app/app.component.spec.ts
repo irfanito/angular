@@ -44,21 +44,31 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have 5€ total when 2€ total and updatePrice with a 3€ product`, () => {
-    // mock
-    customerServiceStub.getTotal.and.returnValue(10);
-    // param
-    const product: Product = {
-      title: 'title',
-      description: 'description',
-      photo: 'photo',
-      price: 3,
-      stock: 0
-    };
+  it(`should ngOnInit call productService.getProducts`, () => {
     // when
-    app.updatePrice(product);
+    app.ngOnInit();
     // then
-    expect(app.total).toEqual(10);
+    expect(app.products$).toBe(productServiceStub.getProducts());
+  });
+
+  it(`should ngOnInit call customerService.getTotal`, () => {
+    // mock
+    const total$ = of(10);
+    customerServiceStub.getTotal.and.returnValue(total$);
+    // when
+    app.ngOnInit();
+    // then
+    expect(app.total$).toBe(total$);
+  });
+
+  it(`should updatePrice call customerService.addProduct`, () => {
+    // mock
+    const total$ = of(10);
+    customerServiceStub.getTotal.and.returnValue(total$);
+    // when
+    app.updatePrice(initProduct());
+    // then
+    expect(app.total$).toEqual(total$);
   });
 
   it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {
@@ -101,4 +111,15 @@ function defaultMock(productServiceStub: any) {
   productServiceStub.isAvailable.and.returnValue(true);
   productServiceStub.isTheLast.and.returnValue(true);
 }
+
+function initProduct(): Product {
+  return {
+    title: 'title',
+    description: 'description',
+    photo: 'photo',
+    price: 3,
+    stock: 2
+  };
+}
+
 

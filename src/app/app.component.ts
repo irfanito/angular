@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {Product} from './model/model/product';
 import {CustomerService} from './services/customer.service';
 import {ProductService} from './services/product.service';
@@ -10,18 +10,18 @@ import {ProductService} from './services/product.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title: string = 'This is my first component';
-  total: number;
+  total$: Observable<number>;
   sortPropertyName: string = 'title';
   sortPropertyNames: string[] = ['title', 'price', 'stock'];
   products$: Observable<Product[]>;
 
   constructor(private productService: ProductService, private customerService: CustomerService) {
-    this.total = 0;
+    this.total$ = of(0);
   }
 
   ngOnInit(): void {
     this.products$ = this.productService.getProducts();
+    this.total$ = this.customerService.getTotal();
   }
 
   public showProduct(product: Product): boolean {
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   public updatePrice(product: Product): void {
-    this.total = this.customerService.getTotal();
+    this.total$ = this.customerService.getTotal();
   }
 
   public onSortByButtonClick(propertyName: string): void {
