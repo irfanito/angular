@@ -24,9 +24,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.products$ = this.productService.getProducts();
-     this.customerService.getTotal().subscribe(res => {
-       this.total = res;
-     })
+     this.updateTotal();
   }
 
   public showProduct(product: Product): boolean {
