@@ -7,25 +7,24 @@ import {Product} from '../model/model/product';
 @Injectable()
 export class CustomerService {
 
-  constructor(private http: HttpClient) {
-  }
-
-  public get basket(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:8080/rest/basket');
-  }
-
-  getTotal(): Observable<number> {
-    return this.basket.pipe(map(this.getTotalFromProducts));
-  }
-
-  addProduct(product: Product): Observable<string> {
-    return this.http.post<string>('http://localhost:8080/rest/basket', product);
-  }
-
-  private getTotalFromProducts(products: Product[]) {
+  private static getTotalFromProducts(products: Product[]): number {
     return products
       .map(product => product.price)
       .reduce((price1, price2) => price1 + price2);
   }
 
+  constructor(private http: HttpClient) {
+  }
+
+  public getBasket(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:8080/rest/basket');
+  }
+
+  getTotal(): Observable<number> {
+    return this.getBasket().pipe(map(CustomerService.getTotalFromProducts));
+  }
+
+  addProduct(product: Product): Observable<string> {
+    return this.http.post<string>('http://localhost:8080/rest/basket', product);
+  }
 }

@@ -26,7 +26,7 @@ describe('CustomerService', () => {
     // given
     const http = TestBed.inject(HttpTestingController);
     // when
-    service.basket.subscribe((products: Product[]) => {
+    service.getBasket().subscribe((products: Product[]) => {
       expect(products).toEqual(defaultProducts);
     });
     // then
