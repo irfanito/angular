@@ -15,23 +15,18 @@ export class AppComponent implements OnInit {
   sortPropertyName: string = 'title';
   sortPropertyNames: string[] = ['title', 'price', 'stock'];
   products$: Observable<Product[]>;
+  total$: Observable<number>;
 
   constructor(private productService: ProductService, private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
     this.products$ = this.productService.getProducts();
-    this.updateTotal();
+    this.total$ = this.customerService.getTotal();
   }
 
   public showProduct(product: Product): boolean {
     return this.productService.isAvailable(product);
-  }
-
-  public updateTotal() {
-    this.customerService.getTotal().subscribe(res => {
-      this.total = res;
-    });
   }
 
   public onSortByButtonClick(propertyName: string): void {
