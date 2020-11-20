@@ -45,23 +45,6 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have 5€ total when 2€ total and updatePrice with a 3€ product`, () => {
-    // mock
-    customerServiceStub.getTotal.and.returnValue(10);
-    // param
-    const product: Product = {
-      title: 'title',
-      description: 'description',
-      photo: 'photo',
-      price: 3,
-      stock: 0
-    };
-    // when
-    app.updatePrice(product);
-    // then
-    expect(app.total).toEqual(10);
-  });
-
   it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {
     // mock
     const productsObservable: Observable<Product[]> = productServiceStub.getProducts();

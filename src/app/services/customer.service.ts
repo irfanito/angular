@@ -1,22 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Product } from '../model/model/product';
 
 @Injectable()
 export class CustomerService {
-  basket: Product[] = [];
 
-  getTotal(): number {
-    if(!this.basket.length){
+  constructor(private http: HttpClient) { }
+
+  public get basket(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:8080/rest/basket');
+  }
+
+  getTotal(): Observable<number> {
+    return this.basket.pipe(map(this.getTotalFromProducts));
+  }
+
+  addProduct(product: Product): Observable<string> {
+    return this.http.post<string>('http://localhost:8080/rest/basket', product);
+  }
+
+  private getTotalFromProducts(products: Product[]) {
+    if(!products.length){
       return 0;
     }
-    return this.basket
-    .map(product => product.price)
-    .reduce((price1, price2) => price1 + price2)
+    return products
+      .map(product => product.price)
+      .reduce((price1, price2) => price1 + price2);
   }
 
-  addProduct(product: Product): void {
-    this.basket.push(product);
-  }
-
-  constructor() { }
 }

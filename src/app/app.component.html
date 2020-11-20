@@ -4,7 +4,7 @@
 
    <header class="jumbotron hero-spacer">
     <h1>{{'Welcome to Zenika Ecommerces' | uppercase}}</h1>
-    <p>Your basket amounts to {{total | currency: 'EUR': 'symbol'}}</p>
+    <p>Your basket amounts to {{total$ | async | currency: 'EUR': 'symbol'}}</p>
     <p><a class="btn btn-primary btn-large">See my basket</a></p>
   </header>
 
