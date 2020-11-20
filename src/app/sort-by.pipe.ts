@@ -7,18 +7,16 @@ import {Product} from './model/model/product';
 export class SortByPipe implements PipeTransform {
 
   transform(value: Product[], propertyName: string): Product[] {
-    if (!value.length) {
-      return [];
+    return value.sort((a, b) => this.compareTo(a[propertyName], b[propertyName]));
+  }
+
+  private compareTo(a: any, b: any): number {
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
     }
-    let sorted: Product[];
-    if (typeof value[0][propertyName] === 'string') {
-      sorted = value
-        .sort((product1, product2) => product1[propertyName].localeCompare(product2[propertyName]));
-    } else {
-      sorted = value
-        .sort((product1, product2) => product1[propertyName] - product2[propertyName]);
-    }
-    return sorted;
+    return 0;
   }
 
 }
