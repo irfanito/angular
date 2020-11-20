@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from './model/model/product';
 import { defaultProducts } from './products';
 import { CustomerService } from './services/customer.service';
@@ -10,18 +11,18 @@ import { ProductService } from './services/product.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title: string = 'This is my first component';
   total: number;
   sortPropertyName: string = 'title';
   sortPropertyNames: string[] = ['title','price','stock'];
+  products$: Observable<Product[]>;
   
   constructor(private productService: ProductService, private customerService: CustomerService){
     this.total = 0;
   }
-
-  public get products(): Product[] {
-    return this.productService.getProducts();
+  ngOnInit(): void {
+    this.products$ = this.productService.getProducts();
   }
 
   public showProduct(product: Product): boolean {

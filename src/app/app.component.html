@@ -25,7 +25,7 @@
       </div>
   </div>
   <div class="row text-center">
-    <ng-container *ngFor="let product of products | sortBy:sortPropertyName">
+    <ng-container *ngFor="let product of products$ | async | sortBy:sortPropertyName">
       <app-product
           *ngIf="showProduct(product)"
           [data]="product"

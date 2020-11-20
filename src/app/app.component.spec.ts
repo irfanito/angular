@@ -1,6 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { Observable, of } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { AppComponent } from './app.component';
 import { Product } from './model/model/product';
 import { ProductComponent } from './product/product.component';
@@ -62,19 +64,21 @@ describe('AppComponent', () => {
 
   it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {
     // mock
-    const products: Product[] = productServiceStub.getProducts();
-    productServiceStub.isAvailable
+    const productsObservable: Observable<Product[]> = productServiceStub.getProducts();
+    productsObservable.subscribe(products => {
+      productServiceStub.isAvailable
       .withArgs(products[0])
       .and
       .returnValue(false);
-    // expected
-    let [firstProduct, ...expected] = products;
-    // when
-    fixture.detectChanges();
+      // expected
+      let [firstProduct, ...expected] = products;
+      // when
+      fixture.detectChanges();
       // then
-    const actual: Product[] = fixture.debugElement.queryAll(By.directive(ProductComponent))
-      .map(debugElement => debugElement.componentInstance.data);
-    expect(actual).toEqual(expected);
+      const actual: Product[] = fixture.debugElement.queryAll(By.directive(ProductComponent))
+        .map(debugElement => debugElement.componentInstance.data);
+      expect(actual).toEqual(expected);
+    });
   });
 
   it(`should sort by price when click on price button`, () => {
@@ -94,7 +98,7 @@ describe('AppComponent', () => {
 });
 
 function defaultMock(productServiceStub: any) {
-  productServiceStub.getProducts.and.returnValue([...defaultProducts]);
+  productServiceStub.getProducts.and.returnValue(of([...defaultProducts]));
   productServiceStub.isAvailable.and.returnValue(true);
   productServiceStub.isTheLast.and.returnValue(true);
 }
