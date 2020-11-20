@@ -3,6 +3,7 @@ import {HttpClientModule} from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {BasketComponent} from './basket/basket.component';
 import {HomeComponent} from './home/home.component';
@@ -14,6 +15,17 @@ import {SortByPipe} from './sort-by.pipe';
 
 registerLocaleData(localeFr);
 
+const routes: Routes = [
+  {
+    path: ''
+    , component: HomeComponent
+  },
+  {
+    path: 'basket'
+    , component: BasketComponent
+  }
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +36,7 @@ registerLocaleData(localeFr);
     BasketComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule
   ],
