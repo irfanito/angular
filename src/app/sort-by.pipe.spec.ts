@@ -43,7 +43,10 @@ describe('SortByPipe', () => {
   });
 
   it('should do nothing with empty products', () => {
+    // when
     const actual = pipe.transform([], 'stock');
+    // then
+    expect(actual).toEqual([])
   });
 });
 
