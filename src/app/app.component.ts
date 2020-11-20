@@ -28,8 +28,8 @@ export class AppComponent implements OnInit {
     return this.productService.isAvailable(product);
   }
 
-  public updatePrice(product: Product): void {
-    this.customerService.addProduct(product).subscribe();
+  public onAddToBasket(product: Product): void {
+    this.customerService.addPReroduct(product).subscribe();
     this.total$ = this.customerService.getTotal();
   }
 

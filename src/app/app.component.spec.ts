@@ -67,7 +67,7 @@ describe('AppComponent', () => {
     customerServiceStub.getTotal.and.returnValue(total$);
     customerServiceStub.addProduct.and.returnValue(of());
     // when
-    app.updatePrice(initProduct());
+    app.onAddToBasket(initProduct());
     // then
     expect(app.total$).toEqual(total$);
   });
@@ -78,7 +78,7 @@ describe('AppComponent', () => {
     // given
     const product = initProduct();
     // when
-    app.updatePrice(product);
+    app.onAddToBasket(product);
     // then
     expect(customerServiceStub.addProduct).toHaveBeenCalledOnceWith(product);
   });
