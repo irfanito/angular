@@ -2,6 +2,7 @@ import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -20,7 +21,8 @@ registerLocaleData(localeFr);
     SortByPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers:[ProductService,CustomerService,{provide: LOCALE_ID, useValue: 'FR'}],
   bootstrap: [AppComponent]
