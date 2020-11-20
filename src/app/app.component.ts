@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.productService.getProducts();
-    this.total$ = this.customerService.getTotal();
+    this.updateTotal();
   }
 
   public showProduct(product: Product): boolean {
@@ -29,10 +29,14 @@ export class AppComponent implements OnInit {
   }
 
   public onAddToBasket(product: Product): void {
-    this.customerService.addProduct(product).subscribe(() => this.total$ = this.customerService.getTotal());
+    this.customerService.addProduct(product).subscribe(() => this.updateTotal());
   }
 
   public onSortByButtonClick(propertyName: string): void {
     this.sortPropertyName = propertyName;
+  }
+
+  private updateTotal(): void {
+    this.total$ = this.customerService.getTotal();
   }
 }
