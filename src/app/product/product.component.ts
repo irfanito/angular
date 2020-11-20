@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from '../model/model/product';
-import {CustomerService} from '../services/customer.service';
 import {ProductService} from '../services/product.service';
 
 @Component({
@@ -12,13 +11,14 @@ export class ProductComponent {
   @Input() data: Product;
   @Output() addToBasket = new EventEmitter<Product>();
 
-  constructor(private productService: ProductService, private customerService: CustomerService){}
+  constructor(private productService: ProductService) {
+  }
 
   public isLast(): boolean {
     return this.productService.isTheLast(this.data);
   }
 
-  public onAddToBasket() {
+  public onAddToBasket(): void {
     this.productService.decreaseStock(this.data);
     this.addToBasket.emit(this.data);
   }

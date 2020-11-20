@@ -46,7 +46,7 @@ describe('SortByPipe', () => {
     // when
     const actual = pipe.transform([], 'stock');
     // then
-    expect(actual).toEqual([])
+    expect(actual).toEqual([]);
   });
 });
 
@@ -70,12 +70,12 @@ function initProductWithPrice(price: number): Product {
   };
 }
 
-  function initProductWithStock(stock: number): Product {
-    return {
-      title: 'title',
-      description: 'description',
-      photo: 'photo',
-      price: 3,
-      stock
-    };
-  }
+function initProductWithStock(stock: number): Product {
+  return {
+    title: 'title',
+    description: 'description',
+    photo: 'photo',
+    price: 3,
+    stock
+  };
+}

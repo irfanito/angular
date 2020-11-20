@@ -23,7 +23,8 @@ registerLocaleData(localeFr);
     BrowserModule,
     HttpClientModule
   ],
-  providers:[ProductService,CustomerService,{provide: LOCALE_ID, useValue: 'FR'}],
+  providers: [ProductService, CustomerService, {provide: LOCALE_ID, useValue: 'FR'}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

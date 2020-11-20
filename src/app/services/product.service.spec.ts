@@ -22,15 +22,15 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should getProducts return httpClient result', waitForAsync (() => {
-  // given
-  const http = TestBed.inject(HttpTestingController);
-  // when
-  service.getProducts().subscribe((products: Product[])=>{
-    expect(products).toEqual(defaultProducts);
-  });
-  // then
-  http.expectOne('http://localhost:8080/rest/products').flush(defaultProducts)
+  it('should getProducts return httpClient result', waitForAsync(() => {
+    // given
+    const http = TestBed.inject(HttpTestingController);
+    // when
+    service.getProducts().subscribe((products: Product[]) => {
+      expect(products).toEqual(defaultProducts);
+    });
+    // then
+    http.expectOne('http://localhost:8080/rest/products').flush(defaultProducts);
   }));
 
   it('should isTheLast return false when stock is 0', () => {

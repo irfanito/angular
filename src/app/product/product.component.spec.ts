@@ -16,13 +16,13 @@ describe('ProductComponent', () => {
     customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['addProduct']);
     productServiceStub = jasmine.createSpyObj('productServiceStub', ['isTheLast', 'decreaseStock']);
     await TestBed.configureTestingModule({
-      declarations: [ ProductComponent ],
+      declarations: [ProductComponent],
       providers: [
-        {provide: CustomerService, useValue:customerServiceStub},
-        {provide: ProductService, useValue:productServiceStub}
+        {provide: CustomerService, useValue: customerServiceStub},
+        {provide: ProductService, useValue: productServiceStub}
       ],
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -54,7 +54,7 @@ describe('ProductComponent', () => {
 
   it('should emit addToBasket event when click on button', () => {
     // given
-    spyOn (component.addToBasket,'emit');
+    spyOn(component.addToBasket, 'emit');
     const button: HTMLImageElement = fixture.debugElement.query(By.css('button')).nativeElement;
     // when
     button.click();
@@ -75,7 +75,7 @@ describe('ProductComponent', () => {
     // when
     fixture.detectChanges();
     // then
-    const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
+    const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'));
     expect(thumbnailLastDebugElements.length).toBeTruthy();
   });
 
@@ -84,8 +84,8 @@ describe('ProductComponent', () => {
     productServiceStub.isTheLast.and.returnValue(false);
     // when
     fixture.detectChanges();
-    //then
-    const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'))
+    // then
+    const thumbnailLastDebugElements: DebugElement[] = fixture.debugElement.queryAll(By.css('.thumbnail.last'));
     expect(thumbnailLastDebugElements.length).toBeFalsy();
   });
 });

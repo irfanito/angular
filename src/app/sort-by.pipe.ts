@@ -11,12 +11,12 @@ export class SortByPipe implements PipeTransform {
       return [];
     }
     let sorted: Product[];
-    if(typeof value[0][propertyName] === "string"){
+    if (typeof value[0][propertyName] === 'string') {
       sorted = value
-      .sort((product1, product2) => product1[propertyName].localeCompare(product2[propertyName]));
+        .sort((product1, product2) => product1[propertyName].localeCompare(product2[propertyName]));
     } else {
       sorted = value
-    .sort((product1, product2) => product1[propertyName] - product2[propertyName]);
+        .sort((product1, product2) => product1[propertyName] - product2[propertyName]);
     }
     return sorted;
   }

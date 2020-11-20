@@ -11,7 +11,7 @@ describe('MenuComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [MenuComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -25,7 +25,7 @@ describe('MenuComponent', () => {
   });
 
   it('should write Zenika in menu', () => {
-    const a: HTMLElement = fixture.debugElement.query(By.css('.navbar-brand')).nativeElement
+    const a: HTMLElement = fixture.debugElement.query(By.css('.navbar-brand')).nativeElement;
     expect(a.textContent.startsWith('Zenika')).toBeTruthy();
   });
 });
