@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Product } from './model/model/product';
+import {Pipe, PipeTransform} from '@angular/core';
+import {Product} from './model/model/product';
 
 @Pipe({
   name: 'sortBy'
@@ -7,7 +7,7 @@ import { Product } from './model/model/product';
 export class SortByPipe implements PipeTransform {
 
   transform(value: Product[], propertyName: string): Product[] {
-    if(!value.length){
+    if (!value.length) {
       return [];
     }
     let sorted: Product[];

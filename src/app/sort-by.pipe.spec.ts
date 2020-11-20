@@ -1,11 +1,11 @@
-import { Product } from './model/model/product';
-import { SortByPipe } from './sort-by.pipe';
+import {Product} from './model/model/product';
+import {SortByPipe} from './sort-by.pipe';
 
 describe('SortByPipe', () => {
   let pipe: SortByPipe;
-  
-  beforeEach(()=>{
-    pipe =new SortByPipe();
+
+  beforeEach(() => {
+    pipe = new SortByPipe();
   });
 
   it('create an instance', () => {

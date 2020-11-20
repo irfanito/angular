@@ -1,9 +1,9 @@
-import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { Product } from '../model/model/product';
-import { defaultProducts } from '../products';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {TestBed, waitForAsync} from '@angular/core/testing';
+import {Product} from '../model/model/product';
+import {defaultProducts} from '../products';
 
-import { CustomerService } from './customer.service';
+import {CustomerService} from './customer.service';
 
 describe('CustomerService', () => {
   let service: CustomerService;

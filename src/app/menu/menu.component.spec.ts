@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 
-import { MenuComponent } from './menu.component';
+import {MenuComponent} from './menu.component';
 
 describe('MenuComponent', () => {
   let component: MenuComponent;
@@ -9,7 +9,7 @@ describe('MenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuComponent ]
+      declarations: [MenuComponent]
     })
     .compileComponents();
   });
