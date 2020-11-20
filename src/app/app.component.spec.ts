@@ -17,7 +17,7 @@ describe('AppComponent', () => {
   let productServiceStub;
 
   beforeEach(async () => {
-    customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['getTotal']);
+    customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['getTotal', 'addProduct']);
     productServiceStub = jasmine.createSpyObj('productServiceStub', ['getProducts', 'isAvailable', 'isTheLast']);
     defaultMock(productServiceStub);
     await TestBed.configureTestingModule({
@@ -61,14 +61,26 @@ describe('AppComponent', () => {
     expect(app.total$).toBe(total$);
   });
 
-  it(`should updatePrice call customerService.addProduct`, () => {
+  it(`should updatePrice call customerService.getTotal`, () => {
     // mock
     const total$ = of(10);
     customerServiceStub.getTotal.and.returnValue(total$);
+    customerServiceStub.addProduct.and.returnValue(of());
     // when
     app.updatePrice(initProduct());
     // then
     expect(app.total$).toEqual(total$);
+  });
+
+  it(`should updatePrice call customerService.addProduct`, () => {
+    // mock
+    customerServiceStub.addProduct.and.returnValue(of());
+    // given
+    const product = initProduct();
+    // when
+    app.updatePrice(product);
+    // then
+    expect(customerServiceStub.addProduct).toHaveBeenCalledOnceWith(product);
   });
 
   it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {
@@ -80,7 +92,7 @@ describe('AppComponent', () => {
         .and
         .returnValue(false);
       // expected
-      let [firstProduct, ...expected] = products;
+      const [, ...expected] = products;
       // when
       fixture.detectChanges();
       // then
@@ -94,7 +106,7 @@ describe('AppComponent', () => {
     // mock
     const [product0, product1, product2, product3]: Product[] = defaultProducts;
     // expected
-    let expected: Product[] = [product3, product2, product0, product1];
+    const expected: Product[] = [product3, product2, product0, product1];
     // when
     const priceButton: HTMLImageElement = fixture.debugElement.query(By.css('#priceButton')).nativeElement;
     priceButton.click();
@@ -106,7 +118,8 @@ describe('AppComponent', () => {
   });
 });
 
-function defaultMock(productServiceStub: any) {
+// tslint:disable-next-line:typedef
+function defaultMock(productServiceStub: any): void {
   productServiceStub.getProducts.and.returnValue(of([...defaultProducts]));
   productServiceStub.isAvailable.and.returnValue(true);
   productServiceStub.isTheLast.and.returnValue(true);

@@ -11,7 +11,7 @@ import {ProductService} from './services/product.service';
 })
 export class AppComponent implements OnInit {
   total$: Observable<number>;
-  sortPropertyName: string = 'title';
+  sortPropertyName = 'title';
   sortPropertyNames: string[] = ['title', 'price', 'stock'];
   products$: Observable<Product[]>;
 
@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
   }
 
   public updatePrice(product: Product): void {
+    // tslint:disable-next-line:variable-name
+    this.customerService.addProduct(product).subscribe();
     this.total$ = this.customerService.getTotal();
   }
 
