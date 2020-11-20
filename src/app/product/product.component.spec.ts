@@ -1,10 +1,10 @@
-import { DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { CustomerService } from '../services/customer.service';
-import { ProductService } from '../services/product.service';
+import {DebugElement} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {CustomerService} from '../services/customer.service';
+import {ProductService} from '../services/product.service';
 
-import { ProductComponent } from './product.component';
+import {ProductComponent} from './product.component';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -60,13 +60,6 @@ describe('ProductComponent', () => {
     button.click();
     // then
     expect(component.addToBasket.emit).toHaveBeenCalledOnceWith(component.data);
-  });
-
-  it(`should onAddToBasket call customerService.addProduct with data`, () => {
-    // when
-    component.onAddToBasket();
-    // then
-    expect(customerServiceStub.addProduct).toHaveBeenCalledOnceWith(component.data);
   });
 
   it(`should onAddToBasket call productService.decreaseStock with data`, () => {
