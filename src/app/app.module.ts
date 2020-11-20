@@ -10,6 +10,8 @@ import { ProductComponent } from './product/product.component';
 import { ProductService } from './services/product.service';
 import { CustomerService } from './services/customer.service';
 import { SortByPipe } from './sort-by.pipe';
+import { HomeComponent } from './home/home.component';
+import { BasketComponent } from './basket/basket.component';
 
 registerLocaleData(localeFr);
 
@@ -18,7 +20,9 @@ registerLocaleData(localeFr);
     AppComponent,
     MenuComponent,
     ProductComponent,
-    SortByPipe
+    SortByPipe,
+    HomeComponent,
+    BasketComponent
   ],
   imports: [
     BrowserModule,
