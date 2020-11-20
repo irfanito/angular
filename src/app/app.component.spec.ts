@@ -65,7 +65,7 @@ describe('AppComponent', () => {
     // mock
     const total$ = of(10);
     customerServiceStub.getTotal.and.returnValue(total$);
-    customerServiceStub.addProduct.and.returnValue(of());
+    customerServiceStub.addProduct.and.returnValue(of('productId'));
     // when
     app.onAddToBasket(initProduct());
     // then

@@ -29,8 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   public onAddToBasket(product: Product): void {
-    this.customerService.addProduct(product).subscribe();
-    this.total$ = this.customerService.getTotal();
+    this.customerService.addProduct(product).subscribe(() => this.total$ = this.customerService.getTotal());
   }
 
   public onSortByButtonClick(propertyName: string): void {
