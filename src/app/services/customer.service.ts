@@ -22,9 +22,6 @@ export class CustomerService {
   }
 
   private getTotalFromProducts(products: Product[]) {
-    if(!products.length){
-      return 0;
-    }
     return products
       .map(product => product.price)
       .reduce((price1, price2) => price1 + price2);

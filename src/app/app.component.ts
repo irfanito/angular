@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Product } from './model/model/product';
 import { defaultProducts } from './products';
 import { CustomerService } from './services/customer.service';
@@ -17,18 +18,25 @@ export class AppComponent implements OnInit{
   sortPropertyName: string = 'title';
   sortPropertyNames: string[] = ['title','price','stock'];
   products$: Observable<Product[]>;
-  total$: Observable<number>;
   
   constructor(private productService: ProductService, private customerService: CustomerService){
   }
 
   ngOnInit(): void {
     this.products$ = this.productService.getProducts();
-    this.total$ = this.customerService.getTotal();
+     this.customerService.getTotal().subscribe(res => {
+       this.total = res;
+     })
   }
 
   public showProduct(product: Product): boolean {
     return this.productService.isAvailable(product);
+  }
+
+  public updateTotal() {
+    this.customerService.getTotal().subscribe(res => {
+      this.total = res;
+    });
   }
 
   public onSortByButtonClick(propertyName: string): void {

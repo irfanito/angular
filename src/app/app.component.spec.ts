@@ -20,6 +20,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['getTotal']);
     productServiceStub = jasmine.createSpyObj('productServiceStub', ['getProducts', 'isAvailable', 'isTheLast']);
+    customerServiceStub.getTotal.and.returnValue(of(0));
     defaultMock(productServiceStub);
     await TestBed.configureTestingModule({
       declarations: [
