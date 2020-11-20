@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   public onAddToBasket(product: Product): void {
-    this.customerService.addPReroduct(product).subscribe();
+    this.customerService.addProduct(product).subscribe();
     this.total$ = this.customerService.getTotal();
   }
 
