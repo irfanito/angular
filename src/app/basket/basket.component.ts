@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
+import {Customer} from '../model/customer';
 import {Product} from '../model/product';
 import {CustomerService} from '../services/customer.service';
 
@@ -10,6 +11,7 @@ import {CustomerService} from '../services/customer.service';
 })
 export class BasketComponent implements OnInit {
   basket$: Observable<Product[]>;
+  customer: Customer;
 
   constructor(private customerService: CustomerService) {
   }
@@ -18,4 +20,7 @@ export class BasketComponent implements OnInit {
     this.basket$ = this.customerService.getBasket();
   }
 
+  checkout(): void {
+    this.customerService.checkout(this.customer);
+  }
 }

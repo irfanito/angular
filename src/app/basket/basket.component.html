@@ -1,3 +1,18 @@
 <div>
-  {{basket$ | async | json}}
+  <div *ngFor="let product of basket$ | async">{{product.title}} cost {{product.price | currency: 'EUR'}}</div>
 </div>
+<form (submit)="checkout()">
+  <div class="form-group has-error">
+    <label class="control-label" for="name">Name</label>
+    <input class="form-control" id="name" name="inputName" type="text">
+  </div>
+  <div class="form-group has-error">
+    <label class="control-label" for="address">Address</label>
+    <textarea class="form-control" id="address" name="inputAddress"></textarea>
+  </div>
+  <div class="form-group has-error">
+    <label class="control-label" for="creditCard">Credit card</label>
+    <input class="form-control" id="creditCard" name="inputCreditCard" type="text">
+  </div>
+  <button type="submit">checkout</button>
+</form>

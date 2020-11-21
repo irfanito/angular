@@ -1,6 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {By} from '@angular/platform-browser';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {of} from 'rxjs';
 import {defaultProducts} from '../products';
 import {CustomerService} from '../services/customer.service';
@@ -13,7 +12,7 @@ describe('BasketComponent', () => {
   let customerServiceStub;
 
   beforeEach(async () => {
-    customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['getBasket']);
+    customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['getBasket', 'checkout']);
     customerServiceStub.getBasket.and.returnValue(of(defaultProducts));
     await TestBed.configureTestingModule({
       declarations: [BasketComponent],
@@ -36,9 +35,18 @@ describe('BasketComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should basket component display basket`, waitForAsync(() => {
+  it(`should checkout call customerService.checkout`, () => {
+    // mock
+    customerServiceStub.checkout.and.returnValue(of());
+    // given
+    component.customer = {
+      name: 'name',
+      address: 'address',
+      creditCard: 'creditCard'
+    };
+    // when
+    component.checkout();
     // then
-    const divDebugElement: HTMLElement = fixture.debugElement.query(By.css('div')).nativeElement;
-    expect(JSON.parse(divDebugElement.textContent)).toEqual(defaultProducts);
-  }));
+    expect(customerServiceStub.checkout).toHaveBeenCalledOnceWith(component.customer);
+  });
 });
