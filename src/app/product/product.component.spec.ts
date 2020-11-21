@@ -87,7 +87,7 @@ describe('ProductComponent', () => {
   it('should emit addToBasket event when click on button', () => {
     // given
     spyOn(component.addToBasket, 'emit');
-    const button: HTMLImageElement = fixture.debugElement.query(By.css('button')).nativeElement;
+    const button: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
     // when
     button.click();
     // then

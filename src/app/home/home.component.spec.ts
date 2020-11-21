@@ -19,7 +19,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['getTotal', 'addProduct']);
-    productServiceStub = jasmine.createSpyObj('productServiceStub', ['getProducts', 'isAvailable', 'isTheLast']);
+    productServiceStub = jasmine.createSpyObj('productServiceStub', ['getProducts', 'isAvailable', 'isTheLast', 'decreaseStock']);
     defaultMock(productServiceStub);
     await TestBed.configureTestingModule({
       declarations: [
@@ -45,46 +45,46 @@ describe('HomeComponent', () => {
     expect(homeComponent).toBeTruthy();
   });
 
-  it(`should ngOnInit call productService.getProducts`, () => {
-    // when
-    homeComponent.ngOnInit();
-    // then
-    expect(homeComponent.products$).toBe(productServiceStub.getProducts());
-  });
-
-  it(`should ngOnInit call customerService.getTotal`, () => {
+  it(`should init total`, () => {
     // mock
-    const total$ = of(10);
+    const total$ = of(479);
     customerServiceStub.getTotal.and.returnValue(total$);
     // when
     homeComponent.ngOnInit();
+    fixture.detectChanges();
     // then
-    expect(homeComponent.total$).toBe(total$);
+    const p: HTMLElement = fixture.debugElement.query(By.css('p')).nativeElement;
+    expect(p.textContent).toBe('Your basket amounts to €479.00');
   });
 
-  it(`should updatePrice call customerService.getTotal`, () => {
+  it(`should refresh total when "add to basket" product component event`, () => {
     // mock
-    const total$ = of(10);
-    customerServiceStub.getTotal.and.returnValue(total$);
     customerServiceStub.addProduct.and.returnValue(of('productId'));
-    // when
-    homeComponent.onAddToBasket(initProduct());
-    // then
-    expect(homeComponent.total$).toEqual(total$);
-  });
-
-  it(`should updatePrice call customerService.addProduct`, () => {
-    // mock
-    customerServiceStub.addProduct.and.returnValue(of());
+    customerServiceStub.getTotal.and.returnValue(of(479));
     // given
-    const product = initProduct();
+    const productComponent: ProductComponent = fixture.debugElement.query(By.directive(ProductComponent)).componentInstance;
     // when
-    homeComponent.onAddToBasket(product);
+    productComponent.onAddToBasket();
+    fixture.detectChanges();
     // then
-    expect(customerServiceStub.addProduct).toHaveBeenCalledOnceWith(product);
+    const p: HTMLElement = fixture.debugElement.query(By.css('p')).nativeElement;
+    expect(p.textContent).toBe('Your basket amounts to €479.00');
   });
 
-  it(`should pass products with stock greather than 0 to ProductComponent childs`, () => {
+  it(`should call addToProduct when "add to basket" product component event`, () => {
+    // mock
+    customerServiceStub.addProduct.and.returnValue(of('productId'));
+    customerServiceStub.getTotal.and.returnValue(of(479));
+    // given
+    const productComponent: ProductComponent = fixture.debugElement.query(By.directive(ProductComponent)).componentInstance;
+    // when
+    productComponent.onAddToBasket();
+    fixture.detectChanges();
+    // then
+    expect(customerServiceStub.addProduct).toHaveBeenCalled();
+  });
+
+  it(`should pass only available products to ProductComponent childs`, () => {
     // mock
     const productsObservable: Observable<Product[]> = productServiceStub.getProducts();
     productsObservable.subscribe(products => {
@@ -103,7 +103,7 @@ describe('HomeComponent', () => {
     });
   });
 
-  it(`should sort by price when click on price button`, () => {
+  it(`should sort products by price when click on price button`, () => {
     // mock
     const [product0, product1, product2, product3]: Product[] = defaultProducts;
     // expected
@@ -123,14 +123,4 @@ function defaultMock(productServiceStub: any): void {
   productServiceStub.getProducts.and.returnValue(of([...defaultProducts]));
   productServiceStub.isAvailable.and.returnValue(true);
   productServiceStub.isTheLast.and.returnValue(true);
-}
-
-function initProduct(): Product {
-  return {
-    title: 'title',
-    description: 'description',
-    photo: 'photo',
-    price: 3,
-    stock: 2
-  };
 }
