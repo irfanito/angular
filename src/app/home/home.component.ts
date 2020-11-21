@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   total$: Observable<number> = of(0);
   sortPropertyName = 'title';
   sortPropertyNames: string[] = ['title', 'price', 'stock'];
-  products$: Observable<Product[]>;
+  products$: Observable<Product[]> = of();
 
   constructor(private productService: ProductService, private customerService: CustomerService) {
   }
@@ -23,15 +23,15 @@ export class HomeComponent implements OnInit {
     this.updateTotal();
   }
 
-  public showProduct(product: Product): boolean {
+  showProduct(product: Product): boolean {
     return this.productService.isAvailable(product);
   }
 
-  public onAddToBasket(product: Product): void {
-    this.customerService.addProduct(product).subscribe(() => this.updateTotal());
+  onAddToBasket(product: Product): void {
+    this.customerService.addProduct(product).subscribe(this.updateTotal);
   }
 
-  public onSortByButtonClick(propertyName: string): void {
+  onSortByButtonClick(propertyName: string): void {
     this.sortPropertyName = propertyName;
   }
 

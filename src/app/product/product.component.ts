@@ -14,11 +14,11 @@ export class ProductComponent {
   constructor(private productService: ProductService) {
   }
 
-  public isLast(): boolean {
+  isLast(): boolean {
     return this.productService.isTheLast(this.data);
   }
 
-  public onAddToBasket(): void {
+  onAddToBasket(): void {
     this.productService.decreaseStock(this.data);
     this.addToBasket.emit(this.data);
   }
