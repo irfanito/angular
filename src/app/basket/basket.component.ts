@@ -28,7 +28,7 @@ export class BasketComponent implements OnInit {
   }
 
   hasError(ngModel: NgModel): boolean {
-    return ngModel.dirty && ngModel.invalid;
+    return ngModel.invalid;
   }
 
   private goToHome(): void {
