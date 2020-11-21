@@ -7,7 +7,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
 import {BasketComponent} from './basket/basket.component';
-import {CheckoutComponent} from './checkout/checkout.component';
 import {HomeComponent} from './home/home.component';
 import {MenuComponent} from './menu/menu.component';
 import {ProductComponent} from './product/product.component';
@@ -25,10 +24,6 @@ const routes: Routes = [
   {
     path: 'basket'
     , component: BasketComponent
-  },
-  {
-    path: 'checkout'
-    , component: CheckoutComponent
   }
 ];
 
@@ -39,8 +34,7 @@ const routes: Routes = [
     ProductComponent,
     SortByPipe,
     HomeComponent,
-    BasketComponent,
-    CheckoutComponent
+    BasketComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
