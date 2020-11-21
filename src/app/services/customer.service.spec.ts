@@ -23,7 +23,7 @@ describe('CustomerService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should addProduct call httpClient with product', waitForAsync(() => {
+  it('should call httpClient with product when addProduct', waitForAsync(() => {
     // given
     const http = TestBed.inject(HttpTestingController);
     const product: Product = initProduct();
@@ -35,7 +35,7 @@ describe('CustomerService', () => {
     http.expectOne('http://localhost:8080/rest/basket').flush('title');
   }));
 
-  it('should checkout call httpClient with customer', waitForAsync(() => {
+  it('should call httpClient with customer when checkout', waitForAsync(() => {
     // given
     const http = TestBed.inject(HttpTestingController);
     const customer: Customer = {
@@ -51,7 +51,7 @@ describe('CustomerService', () => {
     http.expectOne('http://localhost:8080/rest/basket/confirm').flush('name');
   }));
 
-  it('should getTotal return http products price sum', () => {
+  it('should return http products price sum when getTotal', () => {
     // given
     const http = TestBed.inject(HttpTestingController);
     const products: Product[] = [initProduct(), initProduct()];
@@ -62,7 +62,7 @@ describe('CustomerService', () => {
     http.expectOne('http://localhost:8080/rest/basket').flush(products);
   });
 
-  it('should getProducts return httpClient result', waitForAsync(() => {
+  it('should return httpClient result when getProducts', waitForAsync(() => {
     // given
     const http = TestBed.inject(HttpTestingController);
     // when

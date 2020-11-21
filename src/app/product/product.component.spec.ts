@@ -77,9 +77,12 @@ describe('ProductComponent', () => {
     expect(h3.textContent).toBe('description');
   });
 
-  it(`should onAddToBasket call productService.decreaseStock with data`, () => {
+  it(`should call productService.decreaseStock with data when click on button`, () => {
+    // given
+    spyOn(component.addToBasket, 'emit');
+    const button: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
     // when
-    component.onAddToBasket();
+    button.click();
     // then
     expect(productServiceStub.decreaseStock).toHaveBeenCalledOnceWith(component.data);
   });

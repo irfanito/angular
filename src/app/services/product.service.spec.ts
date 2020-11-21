@@ -62,7 +62,7 @@ describe('ProductService', () => {
     expect(product.stock).toBe(4);
   });
 
-  it('should getProducts return httpClient result', waitForAsync(() => {
+  it('should  return httpClient result when getProducts', waitForAsync(() => {
     // given
     const http = TestBed.inject(HttpTestingController);
     // when
