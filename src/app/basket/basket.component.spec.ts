@@ -1,5 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Router} from '@angular/router';
 import {of} from 'rxjs';
 import {defaultProducts} from '../products';
 import {CustomerService} from '../services/customer.service';
@@ -17,7 +18,8 @@ describe('BasketComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [BasketComponent],
       providers: [
-        {provide: CustomerService, useValue: customerServiceStub}
+        {provide: CustomerService, useValue: customerServiceStub},
+        {provide: Router, useValue: jasmine.createSpyObj('router', ['navigate'])}
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })

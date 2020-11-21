@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Customer} from '../model/customer';
 import {Product} from '../model/product';
@@ -11,9 +12,9 @@ import {CustomerService} from '../services/customer.service';
 })
 export class BasketComponent implements OnInit {
   basket$: Observable<Product[]>;
-  customer: Customer;
+  customer: Customer = new Customer();
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -21,6 +22,6 @@ export class BasketComponent implements OnInit {
   }
 
   checkout(): void {
-    this.customerService.checkout(this.customer);
+    this.customerService.checkout(this.customer).subscribe(() => this.router.navigate(['/']));
   }
 }

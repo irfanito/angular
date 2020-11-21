@@ -2,6 +2,7 @@ import {registerLocaleData} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import localeFr from '@angular/common/locales/fr';
 import {LOCALE_ID, NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule, Routes} from '@angular/router';
 import {AppComponent} from './app.component';
@@ -44,7 +45,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [ProductService, CustomerService, {provide: LOCALE_ID, useValue: 'FR'}],
   bootstrap: [AppComponent]
