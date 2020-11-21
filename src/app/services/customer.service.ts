@@ -2,6 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {Customer} from '../model/customer';
 import {Product} from '../model/product';
 
 @Injectable()
@@ -26,5 +27,10 @@ export class CustomerService {
 
   addProduct(product: Product): Observable<string> {
     return this.http.post<string>('http://localhost:8080/rest/basket', product);
+  }
+
+  checkout(customer: Customer): Observable<string> {
+    return this.http.post<string>('http://localhost:8080/rest/basket/confirm', customer);
+
   }
 }

@@ -1,5 +1,6 @@
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestBed, waitForAsync} from '@angular/core/testing';
+import {Customer} from '../model/customer';
 import {Product} from '../model/product';
 import {defaultProducts} from '../products';
 
@@ -55,6 +56,19 @@ describe('CustomerService', () => {
     service.getTotal().subscribe(total => expect(total).toBe(5));
     http.expectOne('http://localhost:8080/rest/basket').flush(products);
   });
+
+  it('should checkout call httpClient with customer', waitForAsync(() => {
+    // given
+    const http = TestBed.inject(HttpTestingController);
+    const customer: Customer = {name: 'name', address: 'address', creditCard: 'creditCard'};
+    // when
+    service.checkout(customer).subscribe((res: string) => {
+      expect(res).toEqual(customer.name);
+    });
+    // then
+    http.expectOne('http://localhost:8080/rest/basket/confirm').flush('name');
+  }));
+
 });
 
 function initProduct(): Product {
