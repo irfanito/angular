@@ -1,5 +1,6 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
 import {defaultProducts} from '../products';
@@ -16,6 +17,7 @@ describe('BasketComponent', () => {
     customerServiceStub = jasmine.createSpyObj('customerServiceStub', ['getBasket', 'checkout']);
     customerServiceStub.getBasket.and.returnValue(of(defaultProducts));
     await TestBed.configureTestingModule({
+      imports: [FormsModule],
       declarations: [BasketComponent],
       providers: [
         {provide: CustomerService, useValue: customerServiceStub},
