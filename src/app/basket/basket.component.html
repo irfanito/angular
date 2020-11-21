@@ -1,7 +1,7 @@
 <div>
   <div *ngFor="let product of basket$ | async">{{product.title}} cost {{product.price | currency: 'EUR'}}</div>
 </div>
-<form (submit)="checkout()">
+<form #form="ngForm" (submit)="checkout()">
   <div [ngClass]="{'has-error': nameInput.dirty && nameInput.invalid}" class="form-group">
     <label class="control-label" for="name">Name</label>
     <input #nameInput="ngModel" [(ngModel)]="customer.name" class="form-control" id="name" name="inputName" required type="text">
@@ -16,5 +16,5 @@
     <input #creditCardInput="ngModel" [(ngModel)]="customer.creditCard" class="form-control" id="creditCard" name="inputCreditCard"
            type="text">
   </div>
-  <button type="submit">checkout</button>
+  <button [disabled]="!form.valid" type="submit">checkout</button>
 </form>
