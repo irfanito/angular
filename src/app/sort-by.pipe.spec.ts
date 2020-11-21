@@ -1,4 +1,4 @@
-import {Product} from './model/model/product';
+import {Product} from './model/product';
 import {SortByPipe} from './sort-by.pipe';
 
 describe('SortByPipe', () => {

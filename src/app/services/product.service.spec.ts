@@ -1,6 +1,6 @@
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestBed, waitForAsync} from '@angular/core/testing';
-import {Product} from '../model/model/product';
+import {Product} from '../model/product';
 import {defaultProducts} from '../products';
 
 import {ProductService} from './product.service';

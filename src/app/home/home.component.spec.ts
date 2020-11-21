@@ -2,7 +2,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {Observable, of} from 'rxjs';
-import {Product} from '../model/model/product';
+import {Product} from '../model/product';
 import {ProductComponent} from '../product/product.component';
 import {defaultProducts} from '../products';
 import {CustomerService} from '../services/customer.service';
