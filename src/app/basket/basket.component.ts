@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {NgModel} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {Customer} from '../model/customer';
@@ -22,7 +23,11 @@ export class BasketComponent implements OnInit {
   }
 
   checkout(): void {
-    this.customerService.checkout(this.customer).subscribe(this.goToHome);
+    this.customerService.checkout(this.customer).subscribe(() => this.goToHome());
+  }
+
+  hasError(ngModel: NgModel): boolean {
+    return ngModel.dirty && ngModel.invalid;
   }
 
   private goToHome(): void {

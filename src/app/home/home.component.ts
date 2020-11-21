@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   }
 
   onAddToBasket(product: Product): void {
-    this.customerService.addProduct(product).subscribe(this.updateTotal);
+    this.customerService.addProduct(product).subscribe(() => this.updateTotal());
   }
 
   onSortByButtonClick(propertyName: string): void {
