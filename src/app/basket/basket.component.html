@@ -2,17 +2,19 @@
   <div *ngFor="let product of basket$ | async">{{product.title}} cost {{product.price | currency: 'EUR'}}</div>
 </div>
 <form (submit)="checkout()">
-  <div class="form-group has-error">
+  <div [ngClass]="{'has-error': nameInput.dirty && nameInput.invalid}" class="form-group">
     <label class="control-label" for="name">Name</label>
-    <input [(ngModel)]="customer.name" class="form-control" id="name" name="inputName" type="text">
+    <input #nameInput="ngModel" [(ngModel)]="customer.name" class="form-control" id="name" name="inputName" required type="text">
   </div>
-  <div class="form-group has-error">
+  <div [ngClass]="{'has-error': addressInput.dirty && addressInput.invalid}" class="form-group">
     <label class="control-label" for="address">Address</label>
-    <textarea [(ngModel)]="customer.address" class="form-control" id="address" name="inputAddress"></textarea>
+    <textarea #addressInput="ngModel" [(ngModel)]="customer.address" class="form-control" id="address" name="inputAddress"
+              required></textarea>
   </div>
-  <div class="form-group has-error">
+  <div [ngClass]="{'has-error': creditCardInput.dirty && creditCardInput.invalid}" class="form-group">
     <label class="control-label" for="creditCard">Credit card</label>
-    <input [(ngModel)]="customer.creditCard" class="form-control" id="creditCard" name="inputCreditCard" type="text">
+    <input #creditCardInput="ngModel" [(ngModel)]="customer.creditCard" class="form-control" id="creditCard" name="inputCreditCard"
+           type="text">
   </div>
   <button type="submit">checkout</button>
 </form>
