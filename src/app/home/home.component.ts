@@ -10,13 +10,12 @@ import {ProductService} from '../services/product.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  total$: Observable<number>;
+  total$: Observable<number> = of(0);
   sortPropertyName = 'title';
   sortPropertyNames: string[] = ['title', 'price', 'stock'];
   products$: Observable<Product[]>;
 
   constructor(private productService: ProductService, private customerService: CustomerService) {
-    this.total$ = of(0);
   }
 
   ngOnInit(): void {

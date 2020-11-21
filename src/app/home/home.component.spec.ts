@@ -119,7 +119,6 @@ describe('HomeComponent', () => {
   });
 });
 
-// tslint:disable-next-line:typedef
 function defaultMock(productServiceStub: any): void {
   productServiceStub.getProducts.and.returnValue(of([...defaultProducts]));
   productServiceStub.isAvailable.and.returnValue(true);
