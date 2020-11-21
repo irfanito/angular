@@ -31,23 +31,6 @@ describe('SortByPipe', () => {
     // then
     expect(actual).toEqual(expected);
   });
-
-  it('should sort products by stock', () => {
-    // given
-    const param = [initProductWithStock(3), initProductWithStock(1), initProductWithStock(2)];
-    const expected = [initProductWithStock(1), initProductWithStock(2), initProductWithStock(3)];
-    // when
-    const actual = pipe.transform(param, 'stock');
-    // then
-    expect(actual).toEqual(expected);
-  });
-
-  it('should do nothing with empty products', () => {
-    // when
-    const actual = pipe.transform([], 'stock');
-    // then
-    expect(actual).toEqual([]);
-  });
 });
 
 function initProductWithTitle(title: string): Product {
@@ -67,15 +50,5 @@ function initProductWithPrice(price: number): Product {
     photo: 'photo',
     price,
     stock: 2
-  };
-}
-
-function initProductWithStock(stock: number): Product {
-  return {
-    title: 'title',
-    description: 'description',
-    photo: 'photo',
-    price: 3,
-    stock
   };
 }

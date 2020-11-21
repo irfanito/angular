@@ -23,17 +23,6 @@ describe('CustomerService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should getProducts return httpClient result', waitForAsync(() => {
-    // given
-    const http = TestBed.inject(HttpTestingController);
-    // when
-    service.getBasket().subscribe((products: Product[]) => {
-      expect(products).toEqual(defaultProducts);
-    });
-    // then
-    http.expectOne('http://localhost:8080/rest/basket').flush(defaultProducts);
-  }));
-
   it('should addProduct call httpClient with product', waitForAsync(() => {
     // given
     const http = TestBed.inject(HttpTestingController);
@@ -44,6 +33,22 @@ describe('CustomerService', () => {
     });
     // then
     http.expectOne('http://localhost:8080/rest/basket').flush('title');
+  }));
+
+  it('should checkout call httpClient with customer', waitForAsync(() => {
+    // given
+    const http = TestBed.inject(HttpTestingController);
+    const customer: Customer = {
+      name: 'name',
+      address: 'address',
+      creditCard: 'creditCard'
+    };
+    // when
+    service.checkout(customer).subscribe((res: string) => {
+      expect(res).toEqual(customer.name);
+    });
+    // then
+    http.expectOne('http://localhost:8080/rest/basket/confirm').flush('name');
   }));
 
   it('should getTotal return http products price sum', () => {
@@ -57,18 +62,16 @@ describe('CustomerService', () => {
     http.expectOne('http://localhost:8080/rest/basket').flush(products);
   });
 
-  it('should checkout call httpClient with customer', waitForAsync(() => {
+  it('should getProducts return httpClient result', waitForAsync(() => {
     // given
     const http = TestBed.inject(HttpTestingController);
-    const customer: Customer = {name: 'name', address: 'address', creditCard: 'creditCard'};
     // when
-    service.checkout(customer).subscribe((res: string) => {
-      expect(res).toEqual(customer.name);
+    service.getBasket().subscribe((products: Product[]) => {
+      expect(products).toEqual(defaultProducts);
     });
     // then
-    http.expectOne('http://localhost:8080/rest/basket/confirm').flush('name');
+    http.expectOne('http://localhost:8080/rest/basket').flush(defaultProducts);
   }));
-
 });
 
 function initProduct(): Product {

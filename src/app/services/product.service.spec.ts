@@ -22,16 +22,17 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should getProducts return httpClient result', waitForAsync(() => {
-    // given
-    const http = TestBed.inject(HttpTestingController);
-    // when
-    service.getProducts().subscribe((products: Product[]) => {
-      expect(products).toEqual(defaultProducts);
-    });
-    // then
-    http.expectOne('http://localhost:8080/rest/products').flush(defaultProducts);
-  }));
+  it('should isAvailable return false when stock is 0', () => {
+    const product: Product = initProduct();
+    product.stock = 0;
+    expect(service.isAvailable(product)).toBeFalsy();
+  });
+
+  it('should isAvailable return false when stock is 1', () => {
+    const product: Product = initProduct();
+    product.stock = 1;
+    expect(service.isAvailable(product)).toBeTruthy();
+  });
 
   it('should isTheLast return false when stock is 0', () => {
     const product: Product = initProduct();
@@ -51,18 +52,6 @@ describe('ProductService', () => {
     expect(service.isTheLast(product)).toBeFalsy();
   });
 
-  it('should isAvailable return false when stock is 0', () => {
-    const product: Product = initProduct();
-    product.stock = 0;
-    expect(service.isAvailable(product)).toBeFalsy();
-  });
-
-  it('should isAvailable return false when stock is 1', () => {
-    const product: Product = initProduct();
-    product.stock = 1;
-    expect(service.isAvailable(product)).toBeTruthy();
-  });
-
   it('should decreaseStock return 4 when stock is 5', () => {
     // given
     const product: Product = initProduct();
@@ -72,6 +61,17 @@ describe('ProductService', () => {
     // then
     expect(product.stock).toBe(4);
   });
+
+  it('should getProducts return httpClient result', waitForAsync(() => {
+    // given
+    const http = TestBed.inject(HttpTestingController);
+    // when
+    service.getProducts().subscribe((products: Product[]) => {
+      expect(products).toEqual(defaultProducts);
+    });
+    // then
+    http.expectOne('http://localhost:8080/rest/products').flush(defaultProducts);
+  }));
 });
 
 function initProduct(): Product {

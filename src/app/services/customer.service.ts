@@ -17,20 +17,19 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
-  public getBasket(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:8080/rest/basket');
-  }
-
-  getTotal(): Observable<number> {
-    return this.getBasket().pipe(map(CustomerService.getTotalFromProducts));
-  }
-
   addProduct(product: Product): Observable<string> {
     return this.http.post<string>('http://localhost:8080/rest/basket', product);
   }
 
   checkout(customer: Customer): Observable<string> {
     return this.http.post<string>('http://localhost:8080/rest/basket/confirm', customer);
+  }
 
+  getTotal(): Observable<number> {
+    return this.getBasket().pipe(map(CustomerService.getTotalFromProducts));
+  }
+
+  getBasket(): Observable<Product[]> {
+    return this.http.get<Product[]>('http://localhost:8080/rest/basket');
   }
 }

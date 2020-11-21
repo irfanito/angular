@@ -9,16 +9,16 @@ export class ProductService {
   constructor(private http: HttpClient) {
   }
 
-  decreaseStock(product: Product): void {
-    product.stock = product.stock - 1;
-  }
-
   isAvailable(product: Product): boolean {
     return product.stock > 0;
   }
 
   isTheLast(product: Product): boolean {
     return product.stock === 1;
+  }
+
+  decreaseStock(product: Product): void {
+    product.stock = product.stock - 1;
   }
 
   getProducts(): Observable<Product[]> {
