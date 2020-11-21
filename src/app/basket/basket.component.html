@@ -13,8 +13,10 @@
   </div>
   <div [ngClass]="{'has-error': creditCardInput.dirty && creditCardInput.invalid}" class="form-group">
     <label class="control-label" for="creditCard">Credit card</label>
-    <input #creditCardInput="ngModel" [(ngModel)]="customer.creditCard" class="form-control" id="creditCard" name="inputCreditCard"
+    <input #creditCardInput="ngModel" [(ngModel)]="customer.creditCard" [pattern]="'[0-9]{3}-[0-9]{3}'" class="form-control" id="creditCard"
+           name="inputCreditCard"
            type="text">
+    <span *ngIf="creditCardInput.dirty && creditCardInput.invalid">Credit card format : 123-456</span>
   </div>
   <button [disabled]="!form.valid" type="submit">checkout</button>
 </form>
