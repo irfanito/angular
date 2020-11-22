@@ -78,9 +78,7 @@ describe('BasketComponent', () => {
       creditCard: '123-456'
     };
     // when
-    fixture.detectChanges();
-    await fixture.whenStable();
-    fixture.detectChanges();
+    await waitValidation(fixture);
     // then
     const checkoutButton: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
     expect(checkoutButton.disabled).toBeTruthy();
