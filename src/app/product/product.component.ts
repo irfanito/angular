@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Product} from '../model/product';
+import {CustomerService} from '../services/customer.service';
 import {ProductService} from '../services/product.service';
 
 @Component({
@@ -9,9 +10,9 @@ import {ProductService} from '../services/product.service';
 })
 export class ProductComponent {
   @Input() data: Product;
-  @Output() addToBasket = new EventEmitter<Product>();
+  @Output() addToBasket = new EventEmitter<void>();
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private customerService: CustomerService) {
   }
 
   isLast(): boolean {
@@ -19,7 +20,9 @@ export class ProductComponent {
   }
 
   onAddToBasket(): void {
-    this.productService.decreaseStock(this.data);
-    this.addToBasket.emit(this.data);
+    this.customerService.addProduct(this.data).subscribe(() => {
+      this.productService.decreaseStock(this.data);
+      this.addToBasket.emit();
+    });
   }
 }

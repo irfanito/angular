@@ -59,29 +59,15 @@ describe('HomeComponent', () => {
 
   it(`should refresh total when "add to basket" product component event`, () => {
     // mock
-    customerServiceStub.addProduct.and.returnValue(of('productId'));
     customerServiceStub.getTotal.and.returnValue(of(479));
     // given
     const productComponent: ProductComponent = fixture.debugElement.query(By.directive(ProductComponent)).componentInstance;
     // when
-    productComponent.onAddToBasket();
+    productComponent.addToBasket.emit();
     fixture.detectChanges();
     // then
     const p: HTMLElement = fixture.debugElement.query(By.css('p')).nativeElement;
     expect(p.textContent).toBe('Your basket amounts to €479.00');
-  });
-
-  it(`should call addToProduct when "add to basket" product component event`, () => {
-    // mock
-    customerServiceStub.addProduct.and.returnValue(of('productId'));
-    customerServiceStub.getTotal.and.returnValue(of(479));
-    // given
-    const productComponent: ProductComponent = fixture.debugElement.query(By.directive(ProductComponent)).componentInstance;
-    // when
-    productComponent.onAddToBasket();
-    fixture.detectChanges();
-    // then
-    expect(customerServiceStub.addProduct).toHaveBeenCalled();
   });
 
   it(`should pass only available products to ProductComponent childs`, () => {

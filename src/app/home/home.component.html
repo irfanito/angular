@@ -23,7 +23,7 @@
 <div class="row text-center">
   <ng-container *ngFor="let product of products$ | async | sortBy:sortPropertyName">
     <app-product
-      (addToBasket)="onAddToBasket(product)"
+      (addToBasket)="updateTotal()"
       *ngIf="showProduct(product)"
       [data]="product"
     ></app-product>

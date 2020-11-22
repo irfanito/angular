@@ -1,6 +1,7 @@
 import {DebugElement} from '@angular/core';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+import {of} from 'rxjs';
 import {CustomerService} from '../services/customer.service';
 import {ProductService} from '../services/product.service';
 
@@ -78,6 +79,8 @@ describe('ProductComponent', () => {
   });
 
   it(`should call productService.decreaseStock with data when click on button`, () => {
+    // mock
+    customerServiceStub.addProduct.and.returnValue(of('productId'));
     // given
     spyOn(component.addToBasket, 'emit');
     const button: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
@@ -87,13 +90,26 @@ describe('ProductComponent', () => {
     expect(productServiceStub.decreaseStock).toHaveBeenCalledOnceWith(component.data);
   });
 
+  it(`should call customerService.addToProduct with data when click on button`, () => {
+    // mock
+    customerServiceStub.addProduct.and.returnValue(of('productId'));
+    // given
+    const button: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
+    // when
+    button.click();
+    // then
+    expect(customerServiceStub.addProduct).toHaveBeenCalledOnceWith(component.data);
+  });
+
   it('should emit addToBasket event when click on button', () => {
+    // mock
+    customerServiceStub.addProduct.and.returnValue(of('productId'));
     // given
     spyOn(component.addToBasket, 'emit');
     const button: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
     // when
     button.click();
     // then
-    expect(component.addToBasket.emit).toHaveBeenCalledOnceWith(component.data);
+    expect(component.addToBasket.emit).toHaveBeenCalledOnceWith();
   });
 });

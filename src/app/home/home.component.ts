@@ -27,15 +27,11 @@ export class HomeComponent implements OnInit {
     return this.productService.isAvailable(product);
   }
 
-  onAddToBasket(product: Product): void {
-    this.customerService.addProduct(product).subscribe(() => this.updateTotal());
-  }
-
   onSortByButtonClick(propertyName: string): void {
     this.sortPropertyName = propertyName;
   }
 
-  private updateTotal(): void {
+  updateTotal(): void {
     this.total$ = this.customerService.getTotal();
   }
 }
