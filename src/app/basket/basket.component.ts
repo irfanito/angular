@@ -23,7 +23,6 @@ export class BasketComponent implements OnInit {
   }
 
   checkout(): void {
-    // unsubscribe?
     this.customerService.checkout(this.customer).subscribe(() => this.goToHome());
   }
 

@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   }
 
   onAddToBasket(product: Product): void {
-    // unsubscribe?
     this.customerService.addProduct(product).subscribe(() => this.updateTotal());
   }
 
